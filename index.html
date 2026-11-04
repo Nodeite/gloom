@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <title>Gloom - A Doom 2D HTML rendition</title>
+        <style>
+            canvas{
+                width: 500;
+                height: 300;
+                display: block;
+                margin: 0 auto;
+            }
+            .cn{
+                width: 500;
+                height:300;
+                display:block;
+                margin: 0 auto;
+            }
+            .hud{
+                width: 500;
+                height:100;
+                display: block;
+                margin: 0 auto;
+                background-color: rgb(109, 107, 107);
+            }
+            .sec{
+                width: 125;
+                height:100;
+                display: block;
+                margin: 0 auto;
+                background-color: rgb(80, 78, 78);
+            }
+            h1,h2,h3,h4,h5,h6,p{
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+                color: aliceblue;
+                font-family: 'Courier New', Courier, monospace;
+                stroke-width: 1;
+                stroke-color: black;
+            }
+            img{
+                display: block;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body style="background-color: black;">
+        <h3 style="color: green;">BURGUNDY: WALL, BLACK: BLANK, BROWN: DEMON</h3>
+        <table>
+            <tr>
+                <td>
+                    <div class="cn" id="canv-holder">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="hud">
+                        <table id="hud-comp">
+                            <tr>
+                                <td>
+                                    <div class="sec">
+                                        <h1 style="color: red;">101</h1>
+                                        <h2>AMMO</h2>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="sec">
+                                        <h1 style="color: red;">100%</h1>
+                                        <h2>HEALTH</h2>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="sec">
+                                        <img src="assets/picon.png" style="width: 50; height:50;">
+                                        <h2>PLAYER</h2>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="sec">
+                                        <h1 style="color: red;">0</h1>
+                                        <h2>ARMOR</h2>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <script>
+            const c = document.createElement("canvas");
+            document.getElementById("canv-holder").appendChild(c);
+
+            const ctx = c.getContext("2d");
+
+            const map = [
+                [1,1,1,1,1,1,1],
+                [1,0,0,0,0,0,1],
+                [1,2,1,0,0,0,1],
+                [1,0,1,1,1,1,1],
+                [1,0,0,0,0,2,1],
+                [1,1,1,1,1,1,1]
+            ];
+
+            const tile = 32;
+            c.width = map[0].length * tile;
+            c.height = map.length * tile;
+
+            for (let y = 0; y < map.length; y++) {
+                for (let x = 0; x < map[y].length; x++) {
+                    if (map[y][x]){
+                        if (map[y][x] === 1){
+                            ctx.fillStyle = "rgb(57,0,0)";
+                            ctx.fillRect(x * tile, y * tile, tile, tile);
+                        } else if (map[y][x] === 0) {
+                            ctx.fillStyle = "black";
+                            ctx.fillRect(x * tile, y * tile, tile, tile);
+                        } else if (map[y][x] === 2){
+                            ctx.fillStyle = "brown";
+                            ctx.fillRect(x*tile, y*tile, (tile/1.5),(tile/1.5));
+                        }
+                    }
+                }
+            }
+            
+        </script>
+    </body>
+</html>
